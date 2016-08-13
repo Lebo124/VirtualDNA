@@ -1,40 +1,43 @@
-float[] c = new float[3];
-float[] c1 = new float[3];
-float[] c2 = new float[3];
-float angle, d, s1, s2, s3, s4, e, f;
-boolean rolloverOn = false;
-float fitness=1;
-int wh=200;
+
 
 class Flower {
+  boolean rolloverOn= false;
+  private float[] c = new float[3];
+  private float[] c1 = new float[3];
+  private float[] c2 = new float[3];
+  private float angle, d, s1, s2, s3, s4, e, f;
+  private float fitness= 1;
+  private int wh=400;
   private int x;
   private int y;
-  private float[] genes;
-  // Using java.awt.Rectangle (see: http://java.sun.com/j2se/1.4.2/docs/api/java/awt/Rectangle.html)
+  Rectangle r;
+  private float[] genes = new float[15];
+
 
 
   Flower(float[] genes_, int posx, int posy) {
-    genes = genes_;
+    arrayCopy(genes_, genes);
     x = posx;
     y = posy;
-  
+    r = new Rectangle(x-wh/2, y-wh/2, wh, wh);
   }
-   void makeVar(){ 
-   
+
+  void makeVar() {
+
     for (int i=0; i < 3; i++) {
-    c[i]   = genes[i]; 
-    c1[i]  = genes[i+3];
-    c2[i]  = genes[i+6];
+      c[i]   = genes[i]; 
+      c1[i]  = genes[i+3];
+      c2[i]  = genes[i+6];
     }
     angle        = map(genes[9], 0, 1, 40, 80);
     d            = map(genes[10], 0, 1, 150, 400);
-    s1           = map(genes[11], 0, 1, 15, 10);
-    s2           = map(genes[12], 0, 1, -12, 12);
-    s3           = map(genes[13], 0, 1, -15, -6);
-    s4           = map(genes[14], 0, 1, -7, -8);
+    s1           = map(genes[11], 0, 1, 30, 20);
+    s2           = map(genes[12], 0, 1, -25, 25);
+    s3           = map(genes[13], 0, 1, -30, -12);
+    s4           = map(genes[14], 0, 1, -14, -16);
     f = 1;
   }
-   
+
 
   // make flower  with recursion
 
@@ -50,6 +53,7 @@ class Flower {
       }
       pushMatrix();
       strokeWeight(1);
+      stroke(0);
       translate (x, y);
       rotate(angle*f);
       e = map(d, 150, 400, 12, 18);
@@ -64,35 +68,33 @@ class Flower {
       d =  d/2;
       display();
     }
-  
 
 
-    strokeWeight(0); // dont want to see the rectangle
-    stroke(0);
-    if (rolloverOn) { 
-      fill(0, 0.25);
+
+
+    if (rolloverOn) {  //<>//
+      fill(0, 0.10);
     } else { 
       noFill();
     }
     rectMode(CENTER);
+    noStroke();
     rect(x, y, wh, wh);
-    //popStyle();
-    if (toggleValue) {
+    if (scr) {
       dispFit();
-   }
+    }
   }
 
   void dispFit() {
-    //strokeWeight(2);
+   
     textAlign(CENTER);
-    //console.log(fitness)
-    //if (rolloverOn) fill(50);
-    //else fill(0.25);
-    strokeWeight(1); 
-    textSize(12);
+    //println(fitness);
+    fill(0.10);
+    strokeWeight(2);  //<>//
+    textSize(18);
     text("" + floor(fitness), x, y+150);
-    strokeWeight(2);
-  }
+  } 
+
 
 
   float getFitness() {
@@ -102,19 +104,20 @@ class Flower {
   float[] getDNA() {
     return genes;
   }
-  
+
 
   // Increment fitness if mouse is rolling over flower
- // void rollover(int mx, int my) {
-  //  
-  //  if ((r).contains(mx, my)) {
-  //    rolloverOn = true;
-   //   fitness += 0.25;
-  //  } else {
-  //    rolloverOn = false;
-  //  }
-  //  if (fitness>50) { // maximum fitness = 50
-  //    fitness=50;
-  //  }
- // }
+  void rollover(int mx, int my) {
+
+    if ((r).contains(mx, my)) {
+      rolloverOn = true;
+      fitness += 0.50;
+      dispFit();
+    } else {
+      rolloverOn = false;
+    }
+    if (fitness>50) { // maximum fitness = 50
+      fitness=50;
+    }
+  }
 }
