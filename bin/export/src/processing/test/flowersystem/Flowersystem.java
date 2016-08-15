@@ -92,7 +92,7 @@ public class Flowersystem extends PApplet
 			theta += radians(angle);
 			// Look, polar coordinates to cartesian!!
 			PVector newvel = new PVector(m * cos(theta), m * sin(theta));
-			timerstart = timerstart / floor(random(1.5f, 2.5f));
+			timerstart = timerstart / floor(random(1.5f, 3.5f));
 			if (timerstart < 40)
 			{
 				timerstart = 40;
@@ -138,7 +138,7 @@ public class Flowersystem extends PApplet
 				c1[i]  = genes[i + 3];
 				c2[i]  = genes[i + 6];
 			}
-			angle        = map(genes[9], 0, 1, 40, 80);
+			angle        = map(genes[9], 0, 1, 40, 100);
 			d            = map(genes[10], 0, 1, 150, 400);
 			s1           = map(genes[11], 0, 1, 30, 20);
 			s2           = map(genes[12], 0, 1, -25, 25);
@@ -274,7 +274,7 @@ public class Flowersystem extends PApplet
 	float[] momgenes, dadgenes;
 	float[] child= new float[15];
 	int n;
-	int generations;
+	int generations=0;
 	int angle;
 	boolean scr=true;
 	boolean drw=true;
@@ -302,13 +302,11 @@ public class Flowersystem extends PApplet
 		cp5.addButton("Show_Tree")
 			.setPosition(10, 1200)
 			.setSize(300, 150)
-
 			;
 
 		cp5.addButton("Next_Generation")
 			.setPosition(10, 1400)
 			.setSize(300, 150)
-
 			;
 	} 
 
@@ -332,6 +330,8 @@ public class Flowersystem extends PApplet
 			text("You can rate the flowers you like and give them a number ", 320, 1250);
 			text("until 50 by putting your finger on the flower. ", 320, 1280);
 			text("After that, push this button.", 320, 1310);
+			textSize(34);
+			text("Generation: " + generations, 10, 650);
 		}
 		else
 		{
@@ -472,7 +472,7 @@ public class Flowersystem extends PApplet
 			}
 			// Fill the new population with the new child
 			population[i] = new Flower(child, 200 + i * 400, 200);
-			generations++;
+			
 		}
 	};
 	public void drawFlower()
@@ -499,7 +499,7 @@ public class Flowersystem extends PApplet
 	};
 
 	public void Show_Tree()
-	{ 
+	{   generations++;
 		scr = false;
 		nextTree();
 	};
