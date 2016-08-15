@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="processing.test.flowersystem" android:versionCode="1" android:versionName="1.0">
-  <uses-sdk android:minSdkVersion="10"/>
-  <application android:label="Flowersystem" android:icon="@drawable/icon" android:debuggable="true">
-    <activity android:name=".Flowersystem">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="processing.test.flowersystem">
+  <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="22"/>
+  <application android:label="Flowersystem" android:debuggable="true">
+    <activity android:name=".Flowersystem" android:screenOrientation="landscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
