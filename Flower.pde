@@ -61,17 +61,14 @@ class Flower {
       bezier(0, 0, 50, 50, 50, 50, 20, 20);
       bezier(0, 0, s1*e, s2, s3*e, s4*e, 0, 0);
       bezier(0, 0, s2*e, s3*e, s4, s1, 0, 0);
-      fill(c[0], c[1], c[2]);
-      ellipse(50, 50, 10, 10);        
+      fill(c2[0], c2[1], c2[2]);
+      ellipse(75, 75, 20, 20);        
 
       popMatrix();
       d =  d/2;
       display();
-    }
-
-
-
-
+     }
+    
     if (rolloverOn) {  //<>//
       fill(0, 0.10);
     } else { 
@@ -91,8 +88,9 @@ class Flower {
     //println(fitness);
     fill(0.10);
     strokeWeight(2);  //<>//
-    textSize(18);
-    text("" + floor(fitness), x, y+150);
+    textSize(26);
+    text("Score: " + totalScore, x, y+200);
+    text("" + floor(fitness), x, y+250);
   } 
 
 
